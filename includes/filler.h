@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 18:43:47 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/29 19:54:04 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/30 01:03:57 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 # define MAPYSIZE game->mapysize
 # define HMULT 10
 # define VMULT 5
-# define CHOKE 20
+# define CHOKE 100
 
 typedef struct		s_fill
 {
 	char			player;
 	int			 	mapxsize;
 	int			 	mapysize;
-	char			**map;
 	int				counter;
 	int				down;
 	int				right;
+	char			**map;
 }					t_fill;
 
 typedef struct		s_piece
@@ -48,6 +48,7 @@ typedef struct		s_piece
 int					parse_input(t_fill *game, t_piece *piece, char *line);
 void				place_piece(t_fill *game, t_piece *piece);
 int					**build_heat_map(t_fill *game);
+void				get_priorities(t_fill *game);
 
 /*
 **	debugging code

@@ -17,7 +17,8 @@ INC = $(addprefix -I,$(INC_PATH))
 INC_LFT = $(addprefix -I, $(addprefix $(LIBFT_PATH), $(INC_PATH)))
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-SRC_NAME = main.c parse_input.c place_piece.c build_heat_map.c debugger.c
+SRC_NAME = main.c parse_input.c place_piece.c build_heat_map.c\
+		   debugger.c get_priorities.c
 
 all: $(PLAYER_PATH)$(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 18:08:07 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/29 19:22:41 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/29 22:29:35 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	make_map(t_fill *game, char *line)
 {
-	game->map[game->counter] = ft_strdup(line + 4);
+	MAP[game->counter] = ft_strdup(line + 4);
 	++game->counter;
 }
 
@@ -29,7 +29,7 @@ static void	get_piece_size(t_piece *piece, char *line)
 	while (line[i] != ' ')
 		++i;
 	piece->xsize = ft_atoi(line + i + 1);
-	if(!(piece->map = ft_memalloc(sizeof(char *) * piece->ysize)))
+	if (!(piece->map = ft_memalloc(sizeof(char *) * piece->ysize)))
 		ft_exit_malloc_error();
 }
 
@@ -41,7 +41,6 @@ static void	get_piece(t_piece *piece, char *line)
 
 int			parse_input(t_fill *game, t_piece *piece, char *line)
 {
-	//ft_putstr_color_fd(line, 1, 2);
 	if (ft_isdigit(line[0]))
 		make_map(game, line);
 	else if (!ft_strncmp("Piece", line, 5))
