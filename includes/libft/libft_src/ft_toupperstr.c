@@ -6,18 +6,22 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 18:44:51 by kmurray           #+#    #+#             */
-/*   Updated: 2017/03/21 18:46:45 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/03 00:17:38 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_toupperstr(char *str)
+char	*ft_toupperstr(char *str)
 {
-	while (*str)
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (ft_isalpha(*str))
-			*str -= 'a' - 'A';
-		++str;
+		if ('a' <= str[i] && str[i] <= 'z')
+			str[i] -= ('a' - 'A');
+		++i;
 	}
+	return (str);
 }

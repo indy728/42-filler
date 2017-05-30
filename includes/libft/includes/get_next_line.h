@@ -6,16 +6,12 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 13:08:00 by kmurray           #+#    #+#             */
-/*   Updated: 2017/03/17 20:34:33 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/08 17:32:15 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
 
 # define BUFF_SIZE 3
 # define MAX_FD 1025

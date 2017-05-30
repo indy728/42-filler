@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   ft_tolowerstr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 14:10:39 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/20 03:17:49 by kmurray          ###   ########.fr       */
+/*   Created: 2017/03/21 18:44:51 by kmurray           #+#    #+#             */
+/*   Updated: 2017/05/03 00:16:47 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_memdel(void **ap)
+char	*ft_tolowerstr(char *str)
 {
-	if (*ap)
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		free(*ap);
-		*ap = NULL;
+		if ('A' <= str[i] && str[i] <= 'Z')
+			str[i] += ('a' - 'A');
+		++i;
 	}
+	return (str);
 }

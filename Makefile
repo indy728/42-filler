@@ -1,46 +1,43 @@
 .PHONY: all, $(NAME), test, clean, fclean, re
 
-NAME= fdf
+NAME= indy.filler
 
-CC= cc
+CC= gcc
 
-GRAPHICS_FLAGS+= -framework OpenGL -framework AppKit
+CFLAGS+= -Wall -Wextra -Werror
 
 SRC_PATH= src/
 INC_PATH= includes/
 OBJ_PATH= obj/
 LIBFT_PATH= includes/libft/
-MLX_PATH= includes/minilibx/
+PLAYER_PATH= resources/players/
 
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 INC = $(addprefix -I,$(INC_PATH))
-INC_MLX = $(addprefix -I, $(MLX_PATH))
 INC_LFT = $(addprefix -I, $(addprefix $(LIBFT_PATH), $(INC_PATH)))
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-SRC_NAME = main.c getx.c gety.c wf_draw_line.c
+SRC_NAME = main.c parse_input.c place_piece.c build_heat_map.c debugger.c
 
-all: $(NAME)
+all: $(PLAYER_PATH)$(NAME)
 
-$(NAME): $(OBJ)
+$(PLAYER_PATH)$(NAME): $(OBJ)
 	make -C $(LIBFT_PATH)
-	make -C $(MLX_PATH)
-	$(CC) -o $(NAME) $(OBJ) -L$(LIBFT_PATH) -lft -L$(MLX_PATH) -lmlx $(GRAPHICS_FLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) -L$(LIBFT_PATH) -lft
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(INC) $(INC_MLX) $(INC_LFT) -o $@ -c $< 
+	$(CC) $(INC) $(INC_LFT) -o $@ -c $< 
 
 test: $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) -L$(LIBFT_PATH) -lft -L$(MLX_PATH) -lmlx $(GRAPHICS_FLAGS)
+	$(CC) -o $(PLAYER_PATH)$(NAME) $(OBJ) -L$(LIBFT_PATH) -lft
 
 clean:
 	make -C $(LIBFT_PATH) clean
-	make -C $(MLX_PATH) clean
 	rm -rf $(OBJ_PATH)
 
 fclean: clean
 	make -C $(LIBFT_PATH) fclean
-	rm -f $(NAME)
+	rm -f $(PLAYER_PATH)$(NAME)
 	
 re: fclean all

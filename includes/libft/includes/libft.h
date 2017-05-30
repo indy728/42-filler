@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:26:25 by kmurray           #+#    #+#             */
-/*   Updated: 2017/04/18 17:12:14 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/28 19:24:51 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdio.h>
+# include <errno.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <fcntl.h>
 # include "get_next_line.h"
 # include "printf.h"
 
@@ -95,7 +100,9 @@ int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
-void				ft_toupperstr(char *str);
+char				*ft_toupperstr(char *str);
+char				*ft_tolowerstr(char *str);
+char				*ft_capitalize_each(char *str);
 int					ft_tolower(int c);
 int					ft_iswhitespace(char c);
 
@@ -108,18 +115,19 @@ void				ft_putnbr(int n);
 int					ft_putlnbr(int n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *str, int fd);
+void				ft_putstr_color_fd(char *str, int color, int fd);
 void				ft_putendl_fd(char const *str, int fd);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_putlnbr_fd(int n, int fd, int i);
-void				ft_exit_malloc_error(char *str, size_t size);
+void				ft_exit_malloc_error();
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstcat(t_list **alst, t_list *new);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
-void				ft_lstadd_back(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+void				ft_lstsort(t_list **lst, int (*cmp)(void *, void *));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				**ft_lstpop(t_list **alst, t_list **begin_list);
 
