@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 18:28:57 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/29 19:24:29 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/29 19:45:38 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ static int check_piece(t_fill *game, t_piece *piece, int x, int y, int **heat_ma
 	}
 	if (counter != 1)
 	   return (0);
-//	if (value > piece->value)
-//	{
+	if (value > piece->value)
+	{
 		piece->placex = x;
 		piece->placey = y;
-//		piece->value = value;
-//	}
+		piece->value = value;
+	}
 	return (1);
 }
 
@@ -102,6 +102,7 @@ void	place_piece(t_fill *game, t_piece *piece)
 	
 	heat_map = build_heat_map(game);
 	piece->value = -9999999;
+//	print_heat_map(game, heat_map);
 	try_piece(game, piece, heat_map);
 	ft_printf("%d %d\n", piece->placey, piece->placex);
 	delete_piece(piece);

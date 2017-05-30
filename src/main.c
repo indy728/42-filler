@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 16:53:00 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/29 19:09:52 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/29 19:59:06 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ int main(int ac, char **av)
 	char	*line;
 	t_fill	*game;
 	t_piece	*piece;
+	static int	q;
 
+	q = 0;
 	line = ft_strnew(1);
 	if (!(game = ft_memalloc(sizeof(t_fill))))
 		ft_exit_malloc_error();
@@ -89,7 +91,8 @@ int main(int ac, char **av)
 	{
 		if(parse_input(game, piece, line))
 		{
-			get_priorities(game);
+			if (!q++)
+				get_priorities(game);
 			place_piece(game, piece);
 		}
 	}

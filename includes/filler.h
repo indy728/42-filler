@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 18:43:47 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/29 19:04:18 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/29 19:54:04 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # define MAP game->map
 # define MAPXSIZE game->mapxsize
 # define MAPYSIZE game->mapysize
-# define HMULT 5
-# define VMULT 1
-# define CHOKE 100
+# define HMULT 10
+# define VMULT 5
+# define CHOKE 20
 
 typedef struct		s_fill
 {
