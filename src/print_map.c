@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_color_fd.c                               :+:      :+:    :+:   */
+/*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/28 19:23:15 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/28 19:25:17 by kmurray          ###   ########.fr       */
+/*   Created: 2017/05/29 17:01:55 by kmurray           #+#    #+#             */
+/*   Updated: 2017/05/31 00:51:01 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "filler.h"
 
-#define CRED "\x1B[31m"
-#define CGRN "\x1B[32m"
-#define CYEL "\x1B[33m"
-#define RESET "\033[0m"
-
-void	ft_putstr_color_fd(char *str, int color, int fd)
+void	print_map(t_fill *game)
 {
-	char *colors[] =
-	{RESET, CRED, CGRN, CYEL};
+	int	i;
+	int	j;
 
-	ft_putstr_fd(colors[color], fd);
-	ft_putendl_fd(str, fd);
-	ft_putstr_fd(RESET, fd);
+	j = 0;
+	while (j < MAPYSIZE)
+	{
+		i = 0;
+		while (i < MAPXSIZE)
+		{
+			if (ft_isalpha(MAP[j][i]))
+			{
+				if (ft_tolower(MAP[j][i]) == game->player)
+					fprintf(stderr, GREEN);
+				else
+					fprintf(stderr, RED);
+			}
+			fprintf(stderr, "%c" RESET, MAP[j][i]);
+			++i;
+		}
+		fprintf(stderr, "\n");
+		++j;
+	}
+	sleep(1);
 }

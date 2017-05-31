@@ -6,108 +6,95 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 18:28:57 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/30 01:06:52 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/31 01:30:06 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static void	delete_piece(t_piece *piece)
-{
-	int i;
-
-	i = 0;
-	while (i < piece->ysize)
-		ft_strdel(&piece->map[i++]);
-	free(piece->map);
-	ft_bzero(piece, sizeof(t_piece));
-}
-
-static void	delete_maps(t_fill *game)
-{
-	int i;
-
-	i = 0;
-	while (i < MAPYSIZE)
-		ft_strdel(&game->map[i++]);
-	free(game->map);
-	if (!(game->map = ft_memalloc(sizeof(char *) * MAPYSIZE)))
-		ft_exit_malloc_error();
-	ft_bzero(game->map, sizeof(char *) * MAPYSIZE);
-	game->counter = 0;
-	
-}
-
-static int	check_piece(t_fill *game, t_piece *piece, int x, int y, int **heat_map)
+static int	check_x(t_fill *game, t_piece *piece, t_place *place, int j)
 {
 	int	i;
-	int	j;
-	int	counter;
-	int	value;
 
-	j = 0;
-	counter = 0;
-	value = 0;
-	while (j < piece->ysize)
+	i = 0;
+	while (i < piece->xsize)
 	{
-		i = 0;
-		while (i < piece->xsize)
-		{
-			if (piece->map[j][i] == '*' && (x + i < 0 || y + j < 0))
-				return (0);
-			if (piece->map[j][i] == '*' && (x + i > MAPXSIZE - 1 || y + j > MAPYSIZE - 1))
-				return (0);
-			if (piece->map[j][i] == '*' && COORDS != game->player && COORDS != '.')
-				return (0);
-			if (piece->map[j][i] == '*' && MAP[j + y][x + i] == '.')
-				value += heat_map[j + y][i + x];
-			if (piece->map[j][i] == '*' && (COORDS == game->player))
-				++counter;
-			++i;
-		}
-		++j;
-	}
-	if (counter != 1)
-		return (0);
-	if (value > piece->value)
-	{
-		piece->placex = x;
-		piece->placey = y;
-		piece->value = value;
+		if (PIECE[j][i] == '*' && ((XPOS + i < 0 || YPOS + j < 0)
+				|| (XPOS + i > MAPXSIZE - 1 || YPOS + j > MAPYSIZE - 1)
+				|| (COORDS != game->player && COORDS != '.')))
+			return (0);
+		++i;
 	}
 	return (1);
 }
 
-static void	try_piece(t_fill *game, t_piece *piece, int **heat_map)
+static void	update_piece(t_piece *piece, int x, int y, int value)
 {
-	int	x;
-	int	y;
+	piece->placex = x;
+	piece->placey = y;
+	piece->value = value;
+}
 
-	x = 1 - piece->xsize;
-	y = 1 - piece->ysize;
-	while (y - piece->ysize < MAPYSIZE - 1)
+static void	check_piece(t_fill *game, t_piece *piece, t_place *place)
+{
+	int i;
+	int	j;
+	int	value;
+
+	j = 0;
+	game->counter = 0;
+	value = 0;
+	while (j < piece->ysize)
 	{
-		while (x - piece->xsize < MAPXSIZE - 1)
+		i = 0;
+		if (!check_x(game, piece, place, j))
+			return ;
+		while (i < piece->xsize)
 		{
-			check_piece(game, piece, x, y, heat_map);
-			++x;
+			if (PIECE[j][i] == '*' && MAP[j + YPOS][XPOS + i] == '.')
+				value += place->heat_map[j + YPOS][i + XPOS];
+			if (PIECE[j][i] == '*' && (COORDS == game->player))
+				++game->counter;
+			++i;
 		}
-		x = 0;
-		++y;
+		++j;
+	}
+	if (game->counter == 1 && value > piece->value)
+		update_piece(piece, XPOS, YPOS, value);
+}
+
+static void	try_piece(t_fill *game, t_piece *piece, t_place *place)
+{
+	XPOS = 1 - piece->xsize;
+	YPOS = 1 - piece->ysize;
+	while (YPOS - piece->ysize < MAPYSIZE - 1)
+	{
+		while (XPOS - piece->xsize < MAPXSIZE - 1)
+		{
+			check_piece(game, piece, place);
+			++XPOS;
+		}
+		XPOS = 0;
+		++YPOS;
 	}
 }
 
+/*
+** USE DEBUGGER CODE BELOW "piece->value" LINE BELOW:
+** print_map(game);
+** print_heat_map(game, place->heat_map);
+*/
+
 void		place_piece(t_fill *game, t_piece *piece)
 {
-	int **heat_map;
+	t_place	*place;
 
+	if (!(place = ft_memalloc(sizeof(t_place))))
+		ft_exit_malloc_error();
 	get_priorities(game);
-	heat_map = build_heat_map(game);
+	place->heat_map = build_heat_map(game);
 	piece->value = -9999999;
-//	print_heat_map(game, heat_map);
-	try_piece(game, piece, heat_map);
+	try_piece(game, piece, place);
 	ft_printf("%d %d\n", piece->placey, piece->placex);
-	delete_piece(piece);
-	delete_maps(game);
-	free(heat_map);
+	clean_structs(game, piece, place);
 }

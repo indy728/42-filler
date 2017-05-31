@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:26:25 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/28 19:24:51 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/31 01:31:37 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void				ft_putnbr(int n);
 int					ft_putlnbr(int n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *str, int fd);
-void				ft_putstr_color_fd(char *str, int color, int fd);
 void				ft_putendl_fd(char const *str, int fd);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_putlnbr_fd(int n, int fd, int i);

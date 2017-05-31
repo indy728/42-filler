@@ -6,13 +6,13 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 17:37:42 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/28 17:59:15 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/31 01:33:03 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_exit_malloc_error()
+void	ft_exit_malloc_error(void)
 {
 	perror("memory allocation error");
 	exit(1);

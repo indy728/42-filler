@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 16:53:00 by kmurray           #+#    #+#             */
-/*   Updated: 2017/05/29 22:37:07 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/05/30 21:59:24 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	get_map_size(t_fill *game, char *line)
 			++i;
 		game->mapxsize = ft_atoi(line + i + 1);
 	}
+	ft_strdel(&line);
 	if (!(game->map = ft_memalloc(sizeof(char *) * game->mapysize)))
 		ft_exit_malloc_error();
 	ft_bzero(game->map, sizeof(char *) * game->mapysize);
@@ -37,7 +38,6 @@ int			main(int ac, char **av)
 	t_fill	*game;
 	t_piece	*piece;
 
-	line = ft_strnew(1);
 	if (!(game = ft_memalloc(sizeof(t_fill))))
 		ft_exit_malloc_error();
 	ft_bzero(game, sizeof(t_fill));
@@ -46,14 +46,16 @@ int			main(int ac, char **av)
 	ft_bzero(piece, sizeof(t_piece));
 	if (get_next_line(0, &line) > 0)
 		game->player = line[10] == '1' ? 'o' : 'x';
+	ft_strdel(&line);
 	get_map_size(game, line);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (parse_input(game, piece, line))
 			place_piece(game, piece);
+		ft_strdel(&line);
 	}
-	free(line);
 	free(piece);
+	free(game->map);
 	free(game);
 	return (0);
 }
