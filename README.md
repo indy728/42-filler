@@ -2,7 +2,7 @@
 ## Game-playing AI project in C
 
 #### Usage: ./filler_vm -f path [-i | -p1 path | -p2 path] <b>[-s | -q | -t time]
-   <br>-t  --time		set timeout in second
+   -t  --time		set timeout in second
    <br>-q  --quiet		quiet mode
    <br>-i  --interactive	interactive mode(default)
    <br>-p1 --player1	use filler binary as a first player
