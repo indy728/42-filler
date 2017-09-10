@@ -3,13 +3,13 @@
 
 #### Usage: ./filler_vm -f path [-i | -p1 path | -p2 path] <b>[-s | -q | -t time]
 
-   -t  --time		set timeout in second
-   -q  --quiet		quiet mode
-   -i  --interactive	interactive mode(default)
-   -p1 --player1	use filler binary as a first player
-   -p2 --player2	use filler binary as a second player
-   -f  --file		use a map file (required)
-   -s  --seed		use the seed number (initialization random) (man srand)</b>
+   <br>-t  --time		set timeout in second
+   <br>-q  --quiet		quiet mode
+   <br>-i  --interactive	interactive mode(default)
+   <br>-p1 --player1	use filler binary as a first player
+   <br>-p2 --player2	use filler binary as a second player
+   <br>-f  --file		use a map file (required)
+   <br>-s  --seed		use the seed number (initialization random) (man srand)</b>
 
 The purpose of this project is to write a competitive AI to place more random objects on a playing board than the opponent.
 
