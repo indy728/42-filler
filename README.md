@@ -26,7 +26,7 @@ The game is played through a provided VM that feeds the text representing the ga
 
 My program receives will include the which player is which and the original board with board size and starting points: 
 
-[screenshot of what my program reads in]
+![read-in](/screenshots/read-in.png?raw=true "read-in")
 
 for contrast, this is the game output to the user:
 
