@@ -33,11 +33,13 @@ for contrast, this is the game output to the user:
 
 A piece may look something like this:
 
-[screenshot of random piece]
+![](/screenshots/simple_piece.png)
 
 The asterisks represent the body of the piece. Placement rules only apply to the asterisked grid units. The empty (".") spaces are ignored. However, the coordinates of the placement correspont to the top left corner of the piece, whethe it is a filled space or an empty space. Negative integers are valid placement coordinates so long as is still allows all filled spaces on the piece to be placed according to the game rules. Here's another example of a bigger piece with lots of empty space:
 
-[screenshot of large piece]
+![](/screenshots/large_piece1.png)
+![](/screenshots/large_piece2.png)
+![](/screenshots/large_piece3.png)
 
 The bulk of the project is reading the VM input and writing an algorithm to place a piece according to the rules. The basic strategy is to interpret the map into a 2D char array and iterate from negative coordinates all the way until the end of the array or until the the program finds a valid spot to place the piece. Once this basic algortithm has been written, implementing an "attack" strategy becomes an easy fine tuning and tinkering project.
 
@@ -47,11 +49,19 @@ My attack strategy dynamically changes depending on where my starting position i
 
 In addition to the efficacy of my attack algorithms, I also included a graphic visualizer for the game. At each turn, it outputs the current game board, with white spaces representing my own sprawl, black spaces representing my opponent, and a green, yellow and red heat map to indicate the attack value of different parts of the game board. 
 
-[screenshot of starting heat map]
+![](/screenshots/heat_map0.png)
+![](/screenshots/heat_map1.png)
 
 This heat map is the best indication of the dynamic switching my program does on certain cues to prioritize different attack strategies.
 
-[screenshots of heat map switching]
+![](/screenshots/heat_map2.png)
+![](/screenshots/heat_map3.png)
+![](/screenshots/heat_map4.png)
+![](/screenshots/heat_map5.png)
+![](/screenshots/heat_map6.png)
+![](/screenshots/heat_map7.png)
+![](/screenshots/heat_map8.png)
+![](/screenshots/heat_map9.png)
 
 ## Project Improvements
 
