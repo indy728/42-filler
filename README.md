@@ -26,11 +26,10 @@ The game is played through a provided VM that feeds the text representing the ga
 
 My program receives will include the which player is which and the original board with board size and starting points: 
 
-![read-in](/screenshots/read-in.png?raw=true "read-in")
-
+![read-in](/screenshots/read-in.png)
 for contrast, this is the game output to the user:
 
-[screenshot of first turn]
+![vm_output](/screenshots/filler_vm_output.png?raw=true "vm_output")
 
 A piece may look something like this:
 
